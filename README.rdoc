@@ -1,0 +1,22 @@
+Installation:
+
+ script/plugin install git://github.com/ddollar/bootstrap.git
+ 
+Usage:
+
+ # create a directory structure that looks similar to this
+ RAILS_ROOT
+   db/
+     bootstrap/
+       user.rb     # runs for any environment, use this for seed data
+       development/
+         company.rb   # runs only in development, use this for dummy data
+         user.rb      # runs only in development, use this for dummy data
+         
+ # create bootstrap files, ideally these should be idempotent
+ users =  []
+ users << { :name => 'David Dollar', :email => 'ddollar@example.org' }
+ users << { :name => 'Kevin Dollar', :email => 'kdollar@example.org' }
+ users.each do |user|
+   User.bootstrap(user, :email)
+ end
